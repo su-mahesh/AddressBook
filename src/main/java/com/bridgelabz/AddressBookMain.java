@@ -1,7 +1,9 @@
 package com.bridgelabz;
 
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 class Contact {
 
@@ -59,6 +61,7 @@ class Contact {
 }
 public class AddressBookMain {
     static Scanner sc = new Scanner(System.in);
+    static Map<String, Contact> addressBook = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     static Contact contact;
 
     public AddressBookMain() {
@@ -67,6 +70,7 @@ public class AddressBookMain {
     public static void add(){
         contact = new Contact();
         String contactName = contact.addContact();
+        addressBook.put(contactName, contact);
     }
 
     public static void main(String[] args) {
@@ -74,10 +78,9 @@ public class AddressBookMain {
         System.out.println("**Welcome to Address Book**");
         while (true){
             System.out.println("1. add contact");
-
             int choice = sc.nextInt();
 
-            switch (choice){
+            switch(choice){
                 case 1: add();
                 break;
             }
