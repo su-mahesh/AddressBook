@@ -1,9 +1,6 @@
 package com.bridgelabz;
 
-import java.util.InputMismatchException;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 
 class Contact {
 
@@ -118,16 +115,21 @@ class Contact {
 public class AddressBookMain {
 
     static Map<String, Contact> addressBook = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+    static Map<String, Map<String, Contact>> addressBookCollection = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+
+    static String addressBookName = "default";
     static Contact contact;
     static String contactName;
 
-    public AddressBookMain() {
-        contact = new Contact();
+    AddressBookMain(){
+        addressBookCollection.put("default", addressBook);
     }
     public static void addContact(){
+
         contact = new Contact();
         contactName = contact.addContact();
-        addressBook.put(contactName, contact);
+        addressBookCollection.get(addressBookName).put(contactName, contact);
+     //   addressBookCollection.put(addressBookName, addressBook);
     }
 
     private static void editContact() {
@@ -135,11 +137,11 @@ public class AddressBookMain {
         contact = new Contact();
         System.out.println("Enter full name: ");
         String contactName = sc.nextLine();
-        if(addressBook.containsKey(contactName)) {
-            contact = addressBook.get(contactName);
-            addressBook.remove(contactName);
+        if(addressBookCollection.get(addressBookName).containsKey(contactName)) {
+            contact = addressBookCollection.get(addressBookName).get(contactName);
+            addressBookCollection.get(addressBookName).remove(contactName);
             contactName = contact.editContactByName();
-            addressBook.put(contactName, contact);
+            addressBookCollection.get(addressBookName).put(contactName, contact);
         }
         else
             System.out.println("contact don't exist");
@@ -150,8 +152,8 @@ public class AddressBookMain {
         System.out.println("Enter full name");
         contactName = sc.nextLine();
 
-        if(addressBook.containsKey(contactName)){
-            addressBook.remove(contactName);
+        if(addressBookCollection.get(addressBookName).containsKey(contactName)){
+            addressBookCollection.get(addressBookName).remove(contactName);
             System.out.println("contact deleted");
         }
         else System.out.println("contact don't exist");
@@ -163,21 +165,43 @@ public class AddressBookMain {
         System.out.println("Enter full name");
         contactName = sc.nextLine();
 
-        if(addressBook.containsKey(contactName)){
-            addressBook.get(contactName).showContact();
+        if(addressBookCollection.get(addressBookName).containsKey(contactName)){
+            addressBookCollection.get(addressBookName).get(contactName).showContact();
         }
         else System.out.println("contact don't exist");
 
     }
+    public static void addAddressBook(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter new address book name: ");
+        String addressBookNameTemp = sc.nextLine();
+        if (!addressBookCollection.containsKey(addressBookNameTemp)){
+            addressBook = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+            addressBookCollection.put(addressBookNameTemp, addressBook);
+            addressBookName = addressBookNameTemp;
+        }
+        else System.out.println("address book already exist");
+    }
+    public static void changeAddressBook(){
 
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter address book name: ");
+        String addressBookNameTemp = sc.nextLine();
+        if (addressBookCollection.containsKey(addressBookNameTemp))
+            addressBookName = addressBookNameTemp;
+        else System.out.println("address book don't exist");
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        AddressBookMain addressBookMain = new AddressBookMain();
+     //   addressBookCollection.put("default", )
         System.out.println("**Welcome to Address Book**");
         while (true){
+            System.out.println("*********s**** Address Book: "+ addressBookName +" ************");
             System.out.println("********************* MENU *********************");
-            System.out.println("1. add contact 2. edit contact 3. delete contact");
-            System.out.println("4 show contact");
+            System.out.println("1. add contact  2. edit contact      3. delete contact");
+            System.out.println("4. show contact 5. add address book  6. change address book");
             int choice = sc.nextInt();
 
             switch(choice){
@@ -189,9 +213,11 @@ public class AddressBookMain {
                 break;
                 case 4: showContact();
                 break;
+                case 5: addAddressBook();
+                break;
+                case 6: changeAddressBook();
+                break;
             }
         }
     }
-
-
 }
