@@ -103,6 +103,17 @@ class Contact {
             }
             return firstName+" "+lastName;
         }
+        public void showContact(){
+            System.out.println("first name: "+first_name);
+            System.out.println("last name: "+last_name);
+            System.out.println("address: "+address);
+            System.out.println("city: "+city);
+            System.out.println("state: "+state);
+            System.out.println("zip: "+zip);
+            System.out.println("phone number: "+phone_number);
+            System.out.println("email: "+email);
+
+        }
 }
 public class AddressBookMain {
 
@@ -146,11 +157,27 @@ public class AddressBookMain {
         else System.out.println("contact don't exist");
     }
 
+    static public void showContact(){
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter full name");
+        contactName = sc.nextLine();
+
+        if(addressBook.containsKey(contactName)){
+            addressBook.get(contactName).showContact();
+        }
+        else System.out.println("contact don't exist");
+
+    }
+
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("**Welcome to Address Book**");
         while (true){
+            System.out.println("********************* MENU *********************");
             System.out.println("1. add contact 2. edit contact 3. delete contact");
+            System.out.println("4 show contact");
             int choice = sc.nextInt();
 
             switch(choice){
@@ -159,6 +186,8 @@ public class AddressBookMain {
                 case 2: editContact();
                 break;
                 case 3: deleteContact();
+                break;
+                case 4: showContact();
                 break;
             }
         }
