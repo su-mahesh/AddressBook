@@ -108,13 +108,14 @@ public class AddressBookMain {
 
     static Map<String, Contact> addressBook = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
     static Contact contact;
+    static String contactName;
 
     public AddressBookMain() {
         contact = new Contact();
     }
     public static void addContact(){
         contact = new Contact();
-        String contactName = contact.addContact();
+        contactName = contact.addContact();
         addressBook.put(contactName, contact);
     }
 
@@ -133,17 +134,32 @@ public class AddressBookMain {
             System.out.println("contact don't exist");
     }
 
+    static public void deleteContact(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter full name");
+        contactName = sc.nextLine();
+
+        if(addressBook.containsKey(contactName)){
+            addressBook.remove(contactName);
+            System.out.println("contact deleted");
+        }
+        else System.out.println("contact don't exist");
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("**Welcome to Address Book**");
         while (true){
-            System.out.println("1. add contact 2. edit contact");
+            System.out.println("1. add contact 2. edit contact 3. delete contact");
             int choice = sc.nextInt();
 
             switch(choice){
                 case 1: addContact();
                 break;
                 case 2: editContact();
+                break;
+                case 3: deleteContact();
+                break;
             }
         }
     }
