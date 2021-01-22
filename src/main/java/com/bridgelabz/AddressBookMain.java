@@ -62,44 +62,55 @@ class Contact {
         String lastName = last_name;
 
             while(true){
+                try {
+                    System.out.println("\n**edit contact**\n1. first name   2. last name");
+                    System.out.println("3. address      4. city");
+                    System.out.println("5. state        6. zip");
+                    System.out.println("7. phone number 8. email");
+                    System.out.println("any key. exit");
 
-                System.out.println("\n**edit contact**\n1. first name   2. last name");
-                System.out.println("3. address      4. city");
-                System.out.println("5. state        6. zip");
-                System.out.println("7. phone number 8. email");
-                System.out.println("any key. exit");
+                    int choice = sc.nextInt();
+                    sc.nextLine();
+                    if (choice < 1 || choice > 8)
+                        break;
 
-                int choice = sc.nextInt();
-                sc.nextLine();
-                if(choice < 1 || choice > 8)
+                    System.out.print("Enter field: ");
+                    String field = sc.nextLine();
+
+                    switch (choice) {
+                        case 1:
+                            first_name = field;
+                            firstName = first_name;
+                            break;
+                        case 2:
+                            last_name = field;
+                            lastName = last_name;
+                            break;
+                        case 3:
+                            address = field;
+                            break;
+                        case 4:
+                            city = field;
+                            break;
+                        case 5:
+                            state = field;
+                            break;
+                        case 6:
+                            zip = Integer.parseInt(field);
+                            break;
+                        case 7:
+                            phone_number = Integer.parseInt(field);
+                            break;
+                        case 8:
+                            email = field;
+                            break;
+                    }
+                }catch (Exception e){
                     break;
-
-                System.out.print("Enter field: ");
-                String field = sc.nextLine();
-
-                switch(choice){
-                    case 1:	first_name = field;
-                        firstName = first_name;
-                        break;
-                    case 2:	last_name = field;
-                        lastName = last_name;
-                        break;
-                    case 3:	address = field;
-                        break;
-                    case 4:	city = field;
-                        break;
-                    case 5:	state = field;
-                        break;
-                    case 6:	zip = Integer.parseInt(field);
-                        break;
-                    case 7:	phone_number = Integer.parseInt(field);
-                        break;
-                    case 8:	email = field;
-                        break;
                 }
             }
             return firstName+" "+lastName;
-        }
+    }
         public void showContact(){
             System.out.println("first name: "+first_name);
             System.out.println("last name: "+last_name);
@@ -111,6 +122,7 @@ class Contact {
             System.out.println("email: "+email);
 
         }
+
 }
 public class AddressBookMain {
 
@@ -128,8 +140,11 @@ public class AddressBookMain {
 
         contact = new Contact();
         contactName = contact.addContact();
-        addressBookCollection.get(addressBookName).put(contactName, contact);
-     //   addressBookCollection.put(addressBookName, addressBook);
+        if(!addressBookCollection.get(addressBookName).containsKey(contactName)){
+            addressBookCollection.get(addressBookName).put(contactName, contact);
+        }
+        else System.out.println("contact already exist");
+
     }
 
     private static void editContact() {
@@ -195,10 +210,9 @@ public class AddressBookMain {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         AddressBookMain addressBookMain = new AddressBookMain();
-     //   addressBookCollection.put("default", )
         System.out.println("**Welcome to Address Book**");
         while (true){
-            System.out.println("*********s**** Address Book: "+ addressBookName +" ************");
+            System.out.println("************** Address Book: "+ addressBookName +" ************");
             System.out.println("********************* MENU *********************");
             System.out.println("1. add contact  2. edit contact      3. delete contact");
             System.out.println("4. show contact 5. add address book  6. change address book");
