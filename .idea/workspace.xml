@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c461d20-1753-446c-b0cd-2fa9da4f7e8b" name="Default Changelist" comment="ADDED: edit contact by name">
+    <list default="true" id="7c461d20-1753-446c-b0cd-2fa9da4f7e8b" name="Default Changelist" comment="ADDED: add new contact to address book">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bridgelabz/AddressBookMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bridgelabz/AddressBookMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/bridgelabz/AddressBookMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bridgelabz/AddressBookMain.class" afterDir="false" />
@@ -85,7 +85,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611327313143</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ADDED: add new contact to address book">
+      <created>1611327604276</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1611327604276</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -102,6 +109,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ADDED: AddressBookMain class" />
     <MESSAGE value="ADDED: edit contact by name" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADDED: edit contact by name" />
+    <MESSAGE value="ADDED: add new contact to address book" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADDED: add new contact to address book" />
   </component>
 </project>
