@@ -114,14 +114,17 @@ class Contact {
             return firstName+" "+lastName;
     }
         public void showContact(){
-            System.out.println("first name: "+first_name);
-            System.out.println("last name: "+last_name);
-            System.out.println("address: "+address);
-            System.out.println("city: "+city);
-            System.out.println("state: "+state);
-            System.out.println("zip: "+zip);
-            System.out.println("phone number: "+phone_number);
-            System.out.println("email: "+email);
+            String contactOutput = "";
+
+            contactOutput += "\nfirst name:   "+first_name;
+            contactOutput += "\nlast name:    "+last_name;
+            contactOutput += "\naddress:      "+address;
+            contactOutput += "\ncity:         "+city;
+            contactOutput += "\nstate:        "+state;
+            contactOutput += "\nzip:          "+zip;
+            contactOutput += "\nphone number: "+phone_number;
+            contactOutput += "\nemail:        "+email;
+            System.out.println(contactOutput);
 
         }
 
@@ -135,6 +138,11 @@ class Contact {
         return first_name+" "+last_name;
     }
 
+    @Override
+    public String toString() {
+        showContact();
+        return "";
+    }
 }
 
 public class AddressBookMain {
@@ -327,8 +335,8 @@ public class AddressBookMain {
                     System.out.println("\nperson: "+index.getAndIncrement());
                     contactPerson.showContact();
                 });}});
-
     }
+
     public static void getCountByCity(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter city name");
@@ -349,21 +357,29 @@ public class AddressBookMain {
         else System.out.println("no data found");
     }
 
+    public static void sortAddressBook(){
+        AtomicInteger i = new AtomicInteger(1);
+        addressBookCollection.get(addressBookName).forEach((key, contact) -> {
+            System.out.println("\ncontact no.: "+i.getAndIncrement());
+            System.out.println(contact);
+        });
+    }
 
     public static void main(String[] args) {
         Scanner sc;
         AddressBookMain addressBookMain = new AddressBookMain();
         System.out.println("**Welcome to Address Book**");
         int choice = 1;
-        while(choice < 12 && choice > 0){
+        while(choice < 13 && choice > 0){
             sc = new Scanner(System.in);
             try {
-                System.out.println("***************** Address Book: " + addressBookName + " ******************");
+                System.out.println("***************** Address Book: " + addressBookName + " *************************");
                 System.out.println("*******************************( MENU )***********************************");
                 System.out.println("1. add contact          2. edit contact            3. delete contact");
                 System.out.println("4. show contact         5. add address book        6. change address book");
                 System.out.println("7. search person        8. view persons by city    9. view persons by state");
-                System.out.println("10. get count by city  11. get count by state     12. exit");
+                System.out.println("10. get count by city  11. get count by state     12. sort address book and display");
+                System.out.println("13. exit");
                 System.out.print("enter: ");
 
                 choice = sc.nextInt();
@@ -401,6 +417,9 @@ public class AddressBookMain {
                         break;
                     case 11:
                         getCountByState();
+                        break;
+                    case 12:
+                        sortAddressBook();
                         break;
                 }
             }catch (InputMismatchException e){
