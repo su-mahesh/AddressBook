@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7c461d20-1753-446c-b0cd-2fa9da4f7e8b" name="Default Changelist" comment="ADDED: search person across multiple address book">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bridgelabz/AddressBookMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bridgelabz/AddressBookMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/bridgelabz/AddressBookMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bridgelabz/AddressBookMain.class" afterDir="false" />
     </list>
@@ -16,12 +15,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="UC6_add_multiple_addressBook" />
+    <option name="BRANCH" value="UC8_search_person_across_address_books" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="UC7_no_duplicate_contact" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -125,7 +124,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611336995690</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="ADDED: search person across multiple address book">
+      <created>1611376021561</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1611376021561</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
