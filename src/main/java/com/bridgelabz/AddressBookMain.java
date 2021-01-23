@@ -3,7 +3,6 @@ package com.bridgelabz;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-
 class Contact {
 
     private String first_name;
@@ -137,9 +136,12 @@ class Contact {
     public String getFullName(){
         return first_name+" "+last_name;
     }
+    public int getZip(){
+        return zip;
+    }
 
     @Override
-    public String toString() {
+    public String toString(){
         showContact();
         return "";
     }
@@ -357,11 +359,34 @@ public class AddressBookMain {
         else System.out.println("no data found");
     }
 
-    public static void sortAddressBook(){
+    public static void sortByName(){
         AtomicInteger i = new AtomicInteger(1);
-        Map<String, Contact> sortedContacts = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-        addressBookCollection.get(addressBookName).values().stream().forEach(contact1 -> { sortedContacts.put(contact1.getFullName(), contact1);});
-        sortedContacts.forEach((k, c) ->{System.out.println("\ncontact no.: "+i.getAndIncrement()); System.out.println(c);});
+        addressBookCollection.get(addressBookName).values().stream()
+                .sorted(Comparator.comparing(Contact::getFullName))
+                .forEach(c ->{System.out.println("\ncontact no.: "+i.getAndIncrement());
+                c.showContact();});
+    }
+    public static void sortByCity(){
+        AtomicInteger i = new AtomicInteger(1);
+        addressBookCollection.get(addressBookName).values().stream()
+                .sorted(Comparator.comparing(Contact::getCity))
+                .forEach(c ->{System.out.println("\ncontact no.: "+i.getAndIncrement());
+                c.showContact();});
+    }
+    public static void sortByState(){
+        AtomicInteger i = new AtomicInteger(1);
+        addressBookCollection.get(addressBookName).values().stream()
+                .sorted(Comparator.comparing(Contact::getState))
+                .forEach(c ->{System.out.println("\ncontact no.: "+i.getAndIncrement());
+                c.showContact();});
+    }
+    public static void sortByZip(){
+        AtomicInteger i = new AtomicInteger(1);
+        addressBookCollection.get(addressBookName).values().stream()
+                .sorted(Comparator.comparing(Contact::getZip))
+                .forEach(c ->{System.out.println("\ncontact no.: "+i.getAndIncrement());
+                c.showContact();});
+
     }
 
     public static void main(String[] args) {
@@ -369,7 +394,7 @@ public class AddressBookMain {
         AddressBookMain addressBookMain = new AddressBookMain();
         System.out.println("**Welcome to Address Book**");
         int choice = 1;
-        while(choice < 13 && choice > 0){
+        while(choice < 16 && choice > 0){
             sc = new Scanner(System.in);
             try {
                 System.out.println("***************** Address Book: " + addressBookName + " *************************");
@@ -377,8 +402,9 @@ public class AddressBookMain {
                 System.out.println("1. add contact          2. edit contact            3. delete contact");
                 System.out.println("4. show contact         5. add address book        6. change address book");
                 System.out.println("7. search person        8. view persons by city    9. view persons by state");
-                System.out.println("10. get count by city  11. get count by state     12. sort address book and display");
-                System.out.println("13. exit");
+                System.out.println("10. get count by city  11. get count by state     12. sort by name and display");
+                System.out.println("13. sort by city       14. sort by state          15. sort by zip");
+                System.out.println("16. exit");
                 System.out.print("enter: ");
 
                 choice = sc.nextInt();
@@ -418,7 +444,16 @@ public class AddressBookMain {
                         getCountByState();
                         break;
                     case 12:
-                        sortAddressBook();
+                        sortByName();
+                        break;
+                    case 13:
+                        sortByCity();
+                        break;
+                    case 14:
+                        sortByState();
+                        break;
+                    case 15:
+                        sortByZip();
                         break;
                 }
             }catch (InputMismatchException e){
