@@ -359,10 +359,9 @@ public class AddressBookMain {
 
     public static void sortAddressBook(){
         AtomicInteger i = new AtomicInteger(1);
-        addressBookCollection.get(addressBookName).forEach((key, contact) -> {
-            System.out.println("\ncontact no.: "+i.getAndIncrement());
-            System.out.println(contact);
-        });
+        Map<String, Contact> sortedContacts = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        addressBookCollection.get(addressBookName).values().stream().forEach(contact1 -> { sortedContacts.put(contact1.getFullName(), contact1);});
+        sortedContacts.forEach((k, c) ->{System.out.println("\ncontact no.: "+i.getAndIncrement()); System.out.println(c);});
     }
 
     public static void main(String[] args) {
