@@ -162,14 +162,18 @@ public class AddressBookMain {
         if(!addressBookCollection.get(addressBookName).containsKey(contactName)){
             addressBookCollection.get(addressBookName).put(contactName, contact);
 
-            if(!addressBookCity.containsKey(contact.getCity())){
+            if(!addressBookCity.containsKey(contact.getCity())) {
                 cityContactList = new ArrayList<>();
                 addressBookCity.put(contact.getCity(), cityContactList);
+            }
+            if (!addressBookState.containsKey(contact.getState())){
                 stateContactList = new ArrayList<>();
                 addressBookState.put(contact.getState(), stateContactList);
             }
             addressBookCity.get(contact.getCity()).add(contact);
             addressBookState.get(contact.getState()).add(contact);
+
+            System.out.println("contact added");
         }
         else System.out.println("contact already exist");
 
@@ -198,13 +202,21 @@ public class AddressBookMain {
         String cityName, stateName;
         if(addressBookCollection.get(addressBookName).containsKey(contactName)){
             contact =  addressBookCollection.get(addressBookName).get(contactName);
-            cityName = addressBookCollection.get(addressBookName).get(contactName).getCity();
-            stateName = addressBookCollection.get(addressBookName).get(contactName).getState();
+            cityName = contact.getCity();
+            stateName = contact.getState();
 
             addressBookCollection.get(addressBookName).remove(contactName);
 
             addressBookCity.get(cityName).remove(contact);
             addressBookState.get(stateName).remove(contact);
+
+            if(addressBookCity.get(cityName).size() == 0)
+                addressBookCity.remove(cityName);
+
+            addressBookState.get(stateName).remove(contact);
+
+            if (addressBookState.get(stateName).size() == 0)
+                addressBookState.remove(stateName);
 
             System.out.println("contact deleted");
         }
@@ -246,8 +258,8 @@ public class AddressBookMain {
 
     public static void searchPerson(){
         Scanner sc = new Scanner(System.in);
-        String city = null;
-        String state = null;
+        String city = "";
+        String state = "";
         System.out.println("Enter full name: ");
         String personName = sc.nextLine();
         System.out.println("1. enter city 2. enter state");
@@ -271,12 +283,16 @@ public class AddressBookMain {
                         flag = false;
                         System.out.println(contactMap.getFullName() + " in " + contactMap.getCity());
                     }
+                    else System.out.println("no data found");
                 }
-                else{
+                else if (ch.equalsIgnoreCase("2")){
                     if(state.equalsIgnoreCase(contactMap.getState()) && personName.equalsIgnoreCase(contactMap.getFullName())){
                         flag = false;
-                        System.out.println(contactMap.getFullName()+" in "+contactMap.getState());}
+                        System.out.println(contactMap.getFullName()+" in "+contactMap.getState());
+                    }
+                    else System.out.println("no data found");
                 }
+
             }
         }
         if(flag)
@@ -313,38 +329,82 @@ public class AddressBookMain {
                 });}});
 
     }
+    public static void getCountByCity(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter city name");
+        String city = sc.nextLine();
+
+        if(addressBookCity.get(city) != null)
+            System.out.println("total number of contacts in city "+city+": "+addressBookCity.get(city).size());
+        else System.out.println("no data found");
+    }
+
+    public static void getCountByState(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter state name");
+        String state = sc.nextLine();
+
+        if(addressBookCity.get(state) != null)
+            System.out.println("total number of contacts in state "+state+": "+addressBookCity.get(state).size());
+        else System.out.println("no data found");
+    }
+
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner sc;
         AddressBookMain addressBookMain = new AddressBookMain();
         System.out.println("**Welcome to Address Book**");
-        while (true){
-            System.out.println("************** Address Book: "+ addressBookName +" ************");
-            System.out.println("********************* MENU *********************");
-            System.out.println("1. add contact    2. edit contact          3. delete contact");
-            System.out.println("4. show contact   5. add address book      6. change address book");
-            System.out.println("7. search person  8. view persons by city  9. view persons by state");
-            int choice = sc.nextInt();
+        int choice = 1;
+        while(choice < 12 && choice > 0){
+            sc = new Scanner(System.in);
+            try {
+                System.out.println("***************** Address Book: " + addressBookName + " ******************");
+                System.out.println("*******************************( MENU )***********************************");
+                System.out.println("1. add contact          2. edit contact            3. delete contact");
+                System.out.println("4. show contact         5. add address book        6. change address book");
+                System.out.println("7. search person        8. view persons by city    9. view persons by state");
+                System.out.println("10. get count by city  11. get count by state     12. exit");
+                System.out.print("enter: ");
 
-            switch(choice){
-                case 1: addContact();
-                break;
-                case 2: editContact();
-                break;
-                case 3: deleteContact();
-                break;
-                case 4: showContact();
-                break;
-                case 5: addAddressBook();
-                break;
-                case 6: changeAddressBook();
-                break;
-                case 7: searchPerson();
-                break;
-                case 8: viewPersonByCity();
-                break;
-                case 9: viewPersonByState();
-                break;
+                choice = sc.nextInt();
+
+                switch (choice) {
+                    case 1:
+                        addContact();
+                        break;
+                    case 2:
+                        editContact();
+                        break;
+                    case 3:
+                        deleteContact();
+                        break;
+                    case 4:
+                        showContact();
+                        break;
+                    case 5:
+                        addAddressBook();
+                        break;
+                    case 6:
+                        changeAddressBook();
+                        break;
+                    case 7:
+                        searchPerson();
+                        break;
+                    case 8:
+                        viewPersonByCity();
+                        break;
+                    case 9:
+                        viewPersonByState();
+                        break;
+                    case 10:
+                        getCountByCity();
+                        break;
+                    case 11:
+                        getCountByState();
+                        break;
+                }
+            }catch (InputMismatchException e){
+                System.out.println("wrong input");
             }
         }
     }
