@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c461d20-1753-446c-b0cd-2fa9da4f7e8b" name="Default Changelist" comment="REFACTORED">
+    <list default="true" id="7c461d20-1753-446c-b0cd-2fa9da4f7e8b" name="Default Changelist" comment="ADDED: search person across multiple address book">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bridgelabz/AddressBookMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bridgelabz/AddressBookMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/bridgelabz/AddressBookMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bridgelabz/AddressBookMain.class" afterDir="false" />
     </list>
@@ -20,7 +21,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="UC7_no_duplicate_contact" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -65,6 +66,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.AddressBookMain" />
         <item itemvalue="Application.AddressBookMain" />
         <item itemvalue="Application.AddressBookMain" />
         <item itemvalue="Application.AddressBookMain" />
@@ -136,6 +138,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ADDED: AddressBookMain class" />
@@ -144,6 +147,7 @@
     <MESSAGE value="ADDED: delete contact by name" />
     <MESSAGE value="ADDED: add multiple contact to address book" />
     <MESSAGE value="REFACTORED" />
-    <option name="LAST_COMMIT_MESSAGE" value="REFACTORED" />
+    <MESSAGE value="ADDED: search person across multiple address book" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADDED: search person across multiple address book" />
   </component>
 </project>

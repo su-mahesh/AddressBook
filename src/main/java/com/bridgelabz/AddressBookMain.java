@@ -2,6 +2,7 @@ package com.bridgelabz;
 
 import java.util.*;
 
+
 class Contact {
 
     private String first_name;
@@ -123,7 +124,18 @@ class Contact {
 
         }
 
+    public String getCity(){
+        return city;
+    }
+    public String getState(){
+        return state;
+    }
+    public String getFullName(){
+        return first_name+" "+last_name;
+    }
+
 }
+
 public class AddressBookMain {
 
     static Map<String, Contact> addressBook = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
@@ -144,7 +156,6 @@ public class AddressBookMain {
             addressBookCollection.get(addressBookName).put(contactName, contact);
         }
         else System.out.println("contact already exist");
-
     }
 
     private static void editContact() {
@@ -207,6 +218,45 @@ public class AddressBookMain {
         else System.out.println("address book don't exist");
     }
 
+    public static void searchPerson(){
+        Scanner sc = new Scanner(System.in);
+        String city = null;
+        String state = null;
+        System.out.println("Enter full name: ");
+        String personName = sc.nextLine();
+        System.out.println("1. enter city 2. enter state");
+        String ch = sc.nextLine();
+        switch (ch){
+            case "1":
+                System.out.println("Enter city: ");
+                city = sc.nextLine();
+                break;
+            case "2":
+                System.out.println("Enter state: ");
+                state = sc.nextLine();
+                break;
+        }
+
+        boolean flag = true;
+        for ( Map<String, Contact> addressBook : addressBookCollection.values()){
+            for (Contact contactMap : addressBook.values()){
+                if(ch.equals("1")) {
+                    if (city.equalsIgnoreCase(contactMap.getCity()) && personName.equalsIgnoreCase(contactMap.getFullName())) {
+                        flag = false;
+                        System.out.println(contactMap.getFullName() + " in " + contactMap.getCity());
+                    }
+                }
+                else{
+                    if(state.equalsIgnoreCase(contactMap.getState()) && personName.equalsIgnoreCase(contactMap.getFullName())){
+                        flag = false;
+                        System.out.println(contactMap.getFullName()+" in "+contactMap.getState());}
+                }
+            }
+        }
+        if(flag)
+            System.out.println("no person found");
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         AddressBookMain addressBookMain = new AddressBookMain();
@@ -216,6 +266,7 @@ public class AddressBookMain {
             System.out.println("********************* MENU *********************");
             System.out.println("1. add contact  2. edit contact      3. delete contact");
             System.out.println("4. show contact 5. add address book  6. change address book");
+            System.out.println("7. search person");
             int choice = sc.nextInt();
 
             switch(choice){
@@ -230,6 +281,8 @@ public class AddressBookMain {
                 case 5: addAddressBook();
                 break;
                 case 6: changeAddressBook();
+                break;
+                case 7: searchPerson();
                 break;
             }
         }
